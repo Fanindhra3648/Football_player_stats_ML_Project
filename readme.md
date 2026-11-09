@@ -1,30 +1,66 @@
-# ⚽ End-to-End European Football Player Goal Prediction Pipeline
+# Football Player Goals Prediction - ML Project
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
-[![Framework](https://img.shields.io/badge/ML-Scikit--Learn-orange.svg)](https://scikit-learn.org/)
-[![IDE](https://img.shields.io/badge/IDE-VS%20Code-blueviolet.svg)](https://code.visualstudio.com/)
+## Project objective
+Predict a football player's season goal count (`Goals`) from the 2022-2023 Football Player Stats dataset using regression models.
 
-An end-to-end Machine Learning regression project designed to predict individual European football players' seasonal goal outputs (`Goals`) using multi-dimensional performance, passing, and match-exposure statistics.
+## Dataset
+- File: `data/raw/football_player_stats.csv`
+- Original format: semicolon-separated CSV (`;`), Latin-1 encoding
+- Rows/columns: 2,689 / 124
+- Target: `Goals`
+- Missing value: one missing value in `Nation`, handled as `Unknown`
 
----
+## Project workflow (same lifecycle-oriented structure as the Churn Prediction reference)
+1. Data validation and exploratory summary
+2. Preprocessing and feature engineering
+3. Train/test split (80/20, random_state=42)
+4. Train and compare regression models
+5. Evaluate with MAE, RMSE, R² and 5-fold cross-validation
+6. Save model, predictions, plots and metadata
+7. Validate data, outputs and reproducibility
+8. Optional MLflow tracking/model registry
 
-## 📌 Project Overview
-Evaluating offensive performance in professional football requires processing highly correlated positional and physical metrics. This project implements a full Machine Learning workflow—from exploratory data analysis and feature engineering to regularized linear modeling, ensemble boosting, hyperparameter tuning, and unseen sample prediction.
+## Important leakage prevention
+`Rk` and `Player` are identifiers and are removed. `G/Sh` and `G/SoT` are goal-derived ratios, so they are removed to avoid giving the model information calculated from the target. The target `Goals` is kept separate from input features.
 
-* **Target Variable:** `Goals` (Continuous numerical metric representing seasonal goal contributions)
-* **Dataset Scope:** 2,689 players across 124 performance metrics from top European leagues (2021–2022 season)
-* **Primary Objective:** Build and evaluate multiple ML algorithms to accurately predict goal contributions while addressing multicollinearity and non-linear feature interactions.
+## Setup (Windows / VS Code)
+```bash
+py -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
 
----
+## Run the complete project
+From this project root:
+```bash
+python pipelines/run_full_pipeline.py
+```
 
-## 🏗️ Project Architecture & Workflow
+Or run each stage:
+```bash
+python src/validate_data.py
+python src/preprocess.py
+python src/train.py
+python src/evaluate.py
+python src/validate_outputs.py
+python src/validate_reproducibility.py
+```
 
-```text
-├── Data Loading (Latin1 Encoding, Delimiter Handling)
-├── Preprocessing & Cleaning (Missing Value Imputation, ID Removal)
-├── Categorical Encoding (pd.get_dummies)
-├── Feature Scaling (StandardScaler for Linear Regressors)
-├── Multi-Model Development (Linear, Ridge, Random Forest, Gradient Boosting)
-├── Comparative Performance Analysis (MAE, RMSE, R² Score)
-├── Hyperparameter Tuning (GridSearchCV with 3-Fold Cross-Validation)
-└── Unseen Data Validation (2022-2023 Season Sample Test)
+## Optional MLflow
+```bash
+python pipelines/run_mlflow.py
+mlflow ui
+```
+Open the local MLflow UI address printed by MLflow in your browser.
+
+## Main outputs
+- `data/processed/processed_football.csv` - encoded feature matrix and target
+- `models/best_goals_model.pkl` - trained regression model
+- `artifacts/split_data.json` - reproducible split information
+- `artifacts/preprocessing_metadata.json` - preprocessing details
+- `outputs/model_comparison.csv` - model performance comparison
+- `outputs/regression_metrics.json` - best model metrics
+- `outputs/predictions.csv` - actual and predicted goals
+- `outputs/actual_vs_predicted.png` - regression plot
+- `outputs/residual_plot.png` - residual diagnostic
+- `outputs/feature_importance.csv` - feature importance where supported

@@ -1,0 +1,16 @@
+{
+  "project": "Football Player Goals Prediction",
+  "dataset_rows": 2689,
+  "dataset_columns": 124,
+  "processed_rows": 2689,
+  "processed_input_features": 329,
+  "target": "Goals",
+  "best_model": "GradientBoostingRegressor",
+  "test_size": 0.2,
+  "random_state": 42,
+  "test_samples": 538,
+  "MAE": 0.502055462252178,
+  "RMSE": 0.8710201616167668,
+  "R2": 0.8067278669101346,
+  "reproducibility": "PASSED"
+}

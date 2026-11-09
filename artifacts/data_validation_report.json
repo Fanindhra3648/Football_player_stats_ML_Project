@@ -1,0 +1,23 @@
+{
+  "status": "PASSED",
+  "shape": [
+    2689,
+    124
+  ],
+  "duplicate_rows": 0,
+  "missing_values": {
+    "Nation": 1
+  },
+  "target": "Goals",
+  "target_summary": {
+    "count": 2689.0,
+    "mean": 1.0275195239866122,
+    "std": 2.013714469701573,
+    "min": 0.0,
+    "25%": 0.0,
+    "50%": 0.0,
+    "75%": 1.0,
+    "max": 25.0
+  },
+  "issues": []
+}

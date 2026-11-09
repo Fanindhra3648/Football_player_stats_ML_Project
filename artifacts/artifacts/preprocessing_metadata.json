@@ -1,0 +1,29 @@
+{
+  "original_shape": [
+    2689,
+    124
+  ],
+  "processed_shape": [
+    2689,
+    330
+  ],
+  "target": "Goals",
+  "dropped_columns": [
+    "Rk",
+    "Player",
+    "G/Sh",
+    "G/SoT"
+  ],
+  "duplicate_rows_removed": 0,
+  "categorical_columns_encoded": [
+    "Nation",
+    "Pos",
+    "Squad",
+    "Comp"
+  ],
+  "encoding": "one-hot encoding with drop_first=True",
+  "missing_nation": "filled with Unknown",
+  "remaining_feature_missing_values_before_fill": 0,
+  "target_type": "regression (numeric goal count)",
+  "leakage_note": "G/Sh and G/SoT removed because they are derived from Goals"
+}

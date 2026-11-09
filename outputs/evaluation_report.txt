@@ -1,0 +1,5 @@
+model: GradientBoostingRegressor
+MAE: 0.502055462252178
+RMSE: 0.8710201616167668
+R2: 0.8067278669101346
+test_samples: 538
